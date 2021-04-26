@@ -67,6 +67,21 @@ router.put('/:id', async (req, res) =>{
 	res.sendStatus(200)
 })
 
+//DELETE Tar bort en hamster beroende på vilket ID man skriver in. Här kan man också göra en koll som tittar om objektet finns först. 
+router.delete('/:id', async (req, res)=>{
+	const id =  req.params.id
+
+	if(!id ){
+		res.sendStatus(400)
+		return
+	}
+
+	await db.collection('hamsters').doc(id).delete()
+	res.sendStatus(200)
+})
+
+
+
 // function isHamstersObject(maybeObject){
 // 	if(!maybeObject || !maybeObject.name || !maybeObject.age){
 // 		return false
