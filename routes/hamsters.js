@@ -5,11 +5,8 @@ const express = require('express')
 const router = express.Router()
 
 
-//REST API
+//GET ALL HAMSTERS
 router.get('/', async (req, res)=>{
-	//console.log('/tools REST API')
-	//res.send('/tools REST API')
-
 	const hamstersRef = db.collection('hamsters')
 	const snapshot = await hamstersRef.get()
 
@@ -25,6 +22,19 @@ router.get('/', async (req, res)=>{
 	})
 
 	res.send(items)
+})
+
+//GET HAMSTER BY ID
+router.get('/:id', async (req, res) => {
+	const id = req.params.id
+	const docRef = await db.collection('hamsters').doc(id).get()
+
+	if(!docRef.exists) {
+		res.status(404).send(`Hamster does not exist.`)
+		return
+	}
+	const data = docRef.data()
+	res.send(data)
 })
 
 
