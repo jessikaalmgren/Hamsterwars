@@ -37,7 +37,19 @@ router.get('/:id', async (req, res) => {
 	res.send(data)
 })
 
+//POSTAR ETT NYTT HAMSTEROBJEKT. RETURNERAR DET NYA ID:ET FÖR OBJEKTET. 
+router.post('/', async (req, res) => {
+	const object = req.body 
 
+	if(!object || !object.name || !object.age){
+		req.sendStatus(400).send('Fel request, funkar inte')
+		return
+	}
+
+	const docRef = await db.collection('hamsters').add(object)
+	res.send(docRef)
+
+})
 
 
 
