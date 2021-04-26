@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const path = require('path')
+const hamsters = require('./routes/hamsters.js')
 
 const PORT = 1440
 const staticFolder = path.join(__dirname, 'public')
@@ -17,6 +18,10 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use(cors())
 app.use(express.static(staticFolder))
+
+
+//Bygga rest api för hamsters
+app.use('/hamsters', hamsters)
 
 app.listen(PORT, () => {
 	console.log('Server is listening on port ' + PORT)
