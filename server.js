@@ -9,7 +9,7 @@ const losers = require('./routes/losers.js')
 const matchWinners = require('./routes/matchWinners.js')
 
 
-const PORT = 1440
+const PORT = process.env.PORT || 1440
 const staticFolder = path.join(__dirname, 'public')
 const staticFolder2 = path.join(__dirname, 'assets')
 
